@@ -1,0 +1,13 @@
+package com.oracle.emstest;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class EmstestApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
