@@ -31,7 +31,7 @@ return 	employeeService.registerEmployee(employee);
 }
 
 @GetMapping("/{email}")
-public Object getEmployeeByEmail(@PathVariable String email) {
+public Object getEmployeeByEmail(@Valid @PathVariable String email) {
 	return employeeService.getEmployeeByEmail(email);
 }
 
@@ -41,12 +41,12 @@ public Object getAllEmployee() {
 }
 
 @DeleteMapping("/{email}")
-public Object deleteEmployeeByEmail(@PathVariable	String email) {
+public Object deleteEmployeeByEmail(@Valid	@PathVariable	String email) {
 	return employeeService.deleteEmployeeByEmail(email);
 }
 
 @PatchMapping("/{email}")
-public Object updateEmployee(@PathVariable String email,@RequestBody Employee employees) {
+public Object updateEmployee(@Valid	@PathVariable String email,@RequestBody Employee employees) {
 return employeeService.updateEmployee(email, employees);
 }
 

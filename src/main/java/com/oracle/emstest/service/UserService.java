@@ -3,6 +3,7 @@ package com.oracle.emstest.service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.oracle.emstest.dto.RegisterRequest;
@@ -15,16 +16,16 @@ public class UserService {
 
 	private UserRepository userRepository;
 	private OtpService otpService;
+	private PasswordEncoder passwordEncoder;
 
-	
-	public UserService(UserRepository userRepository, OtpService otpService) {
+
+	public UserService(UserRepository userRepository, OtpService otpService, PasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
 		this.otpService = otpService;
+		this.passwordEncoder = passwordEncoder;
 	}
 
-
-
-
+	
 	public String register(RegisterRequest registerRequest) {
 Optional<User>	op=	userRepository.findByEmail(registerRequest.getEmail());
 if(op.isPresent()) {
@@ -33,7 +34,7 @@ if(op.isPresent()) {
 	User user=new User();
 	user.setName(registerRequest.getName());
 	user.setEmail(registerRequest.getEmail());
-	user.setPassword(registerRequest.getPassword());
+	user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 	user.setRole("User");
 	user.setVerified(false);
 	
